@@ -1,5 +1,7 @@
-package com.select.shop;
+package com.select.shop.controller;
 
+import com.select.shop.util.NaverShopSearch;
+import com.select.shop.dto.ItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,4 +1,4 @@
-package com.select.shop;
+package com.select.shop.model;
 
 import lombok.Getter;
 import lombok.Setter;

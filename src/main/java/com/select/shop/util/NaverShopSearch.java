@@ -1,5 +1,6 @@
-package com.select.shop;
+package com.select.shop.util;
 
+import com.select.shop.dto.ItemDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.*;
