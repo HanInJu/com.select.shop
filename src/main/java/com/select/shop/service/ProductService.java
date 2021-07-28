@@ -7,6 +7,7 @@ import com.select.shop.dto.ProductRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,18 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public List<Product> getProducts(Long userId) {
+        return productRepository.findAllByUserId(userId);
+    }
+
+    /* 회원 ID를 같이 등록하지 않을 때의 상품 조회 함수
     public List<Product> getProducts() {
 //        ArrayList<Product> products = productRepository.getProducts();
 //        return products;
         return productRepository.findAll();
     }
-
+     */
+    /*
     public Product createProduct(ProductRequestDto requestDto) { //throws Exception { 원래 이거였지만 직접 쿼리를 다루지 않아서 필요X
         Product product = new Product(requestDto);
         LocalDateTime now = LocalDateTime.now();
@@ -35,6 +42,13 @@ public class ProductService {
         //Product resultProduct = productRepository.createProduct(product);
         Product resultProduct = productRepository.save(product);
         return resultProduct;
+    }
+    */
+    @Transactional // 메소드 동작이 SQL 쿼리문임을 선언합니다.
+    public Product createProduct(ProductRequestDto requestDto, Long userId ) {
+        Product product = new Product(requestDto, userId);
+        productRepository.save(product);
+        return product;
     }
 
     //방법2 @Transactional
@@ -62,5 +76,9 @@ public class ProductService {
         //이 방법으로는 .save 안 해도 @Transactional의 도움을 받아서 Entity가 바뀔 때는 알아서 저장해 준다.
 
         return product.getId();
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }

@@ -34,7 +34,18 @@ public class Product extends Timestamped { //DB에 대응되는 Entity class
     @Column(nullable = false)
     private int myprice; //희망 최저가
 
-    // 관심 상품 생성 시 이용합니다.
+    @Column(nullable = false)
+    private Long userId;
+
+    public Product(ProductRequestDto requestDto, Long userId) {
+        this.userId = userId;
+        this.title = requestDto.getTitle();
+        this.image = requestDto.getImage();
+        this.link = requestDto.getLink();
+        this.lprice = requestDto.getLprice();
+        this.myprice = 0;
+    }
+    /* userId 없이 등록되었을 때 사용하던 부분으로, 이렇게 사용하면 다른사람의 관심 목록까지 나타난다.
     public Product(ProductRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.image = requestDto.getImage();
@@ -42,4 +53,5 @@ public class Product extends Timestamped { //DB에 대응되는 Entity class
         this.lprice = requestDto.getLprice();
         this.myprice = 0;
     }
+     */
 }

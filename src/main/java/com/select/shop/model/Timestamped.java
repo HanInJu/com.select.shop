@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Setter
-@Getter // get 함수를 자동 생성합니다.
+@Getter
 @MappedSuperclass // 멤버 변수가 컬럼이 되도록 합니다.
 @EntityListeners(AuditingEntityListener.class) // 변경되었을 때 자동으로 기록합니다.
 public abstract class Timestamped {
